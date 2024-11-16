@@ -1,0 +1,41 @@
+ordertable
+<div class="col-md-2">
+    <a class="btn btn-info text-white" href="{% url 'in_process_view' %}">In Process</a>
+</div>
+<div class="col-md-2">
+    <a class="btn btn-info text-white" href="{% url 'payment_pending_view' %}">Payment Pending</a>
+</div>
+<div class="col-md-2">
+    <a class="btn btn-info text-white" href="{% url 'completed_view' %}">Completed</a> 
+</div>
+<div class="col-md-1">
+    <a class="btn btn-info text-white" href="{% url 'rejected_view' }">Rejected</a> 
+</div>
+<div class="col-md-1">
+    <a class="btn btn-info text-white" href="{% url 'rejected_view'  %}">All</a>
+</div>
+
+def in_process_view(request):
+    orders_in_process = ordertb.objects.filter(orderstatus='pending')
+    return render(request, 'admin/.html', {'n':orders_in_process})
+
+def all_orders_view(request):
+    orders = ordertb.objects.all()  
+    return render(request, 'admin/managerview', {'n': orders})
+
+def in_process_view(request):
+    orders = ordertb.objects.filter(orderstatus='in_process')  
+    return render(request, 'admin/managerview.html', {'n': orders})
+
+def payment_pending_view(request):
+    orders = ordertb.objects.filter(orderstatus='payment_pending')  
+    return render(request, 'admin/managerview.html', {'n': orders})
+
+
+def completed_view(request):
+    orders = ordertb.objects.filter(orderstatus='completed') 
+    return render(request, 'admin/managerview.html', {'n': orders})
+
+def rejected_view(request):
+    orders = ordertb.objects.filter(orderstatus='rejected')  
+    return render(request, 'admin/managerview.html', {'n': orders})

@@ -1,0 +1,126 @@
+{% extends 'customer/userhome.html' %}
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h3></h3>
+
+        </div>
+
+    </div>
+    <div class="card border">
+        <div class="card card-header bg-black">
+            <div class="row">
+                <div class="col-7">
+                    <h5 class="text-white">Order Summary</h5>
+                </div>
+                <div class="offset-2 col-3">
+                  <h6 class="text-info bg-gradient border-1"><a href="{% url 'shopcart'  %}">Back To Home</a></h6>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            {% for i in v %}
+            <form action="{% url 'checkout' %}" method="post">
+                {% csrf_token %}
+            <div class="row">
+                <h4 class="text-info">PickUp Deatails</h4>
+                <br>
+                <br>
+<div class="col-1">
+<h7>Name</h7>
+<br>
+<br>
+<h7>Phone</h7>
+<br>
+<br>
+<h7>Email</h7>
+<br>
+<br>
+<h7>Address</h7>
+<br>
+<br>
+<br>
+<h7>City</h7>
+<br>
+<br>
+<h7>state</h7>
+<br>
+<br>
+<h7>Postalcode</h7>
+</div>
+<div class="col-5">
+    <label for="username"></label>
+    <input type="text" value="{{i.user.first_name}}  {{i.user.last_name}}" name="name">
+    <br>
+    <br>
+    <label for="phone"></label>
+    <input type="text" value="{{i.user.phone}}" name="phone">
+    <br>
+    <br>
+    <label for="email"></label>
+    <input type="text" value="{{i.user.email}}" name="email">
+    <br>
+    <br>
+    <label for="address"></label>
+    <input type="text" value="{{i.address}}" name="address">
+    <br>
+    <br>
+    <label for="city"></label>
+    <input type="text" value="{{i.city}}" name="city">
+    <br>
+    <br>
+    <label for="state"></label>
+    <input type="text" value="{{i.state}}" name="state">
+    <br>
+    <br>
+    <label for="postalcode"></label>
+    <input type="text" value="{{i.postalcode}}" name="postalcode">
+</div>
+
+<div class="col-6">
+    <h4 class="text-info">Order Summary</h4>
+    {% for m in n %}
+    <span><h5>{{m.productid.title}}</h5></span>
+    <span>Quantity:{{m.count}}</span>
+    <br> 
+    <span>${{m.price}}</span>
+    <br>
+    {% endfor %}
+    <br>
+    <span class="text-info">Total(USD):${{gr}}</span>
+    <input type="hidden" value="{{gr}}" name="grandtotal">
+</div>
+
+</div>
+{% endfor %}
+</div>
+
+<div class="card-footer bg-light">
+    <div class="row">
+        <div class="offset-9 col-3">
+           <button type="submit" class="btn btn-success form-control">PlaceOrder</button>
+        </div>
+    </form>
+
+    </div>
+
+</div>
+
+
+</div>
+          
+            </div>
+
+   
+
+</div>
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert("{{msg}}")</script>
+{% endfor %}
+{% endif %}
+{% endblock %}

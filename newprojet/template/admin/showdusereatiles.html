@@ -1,0 +1,180 @@
+{% extends 'customer/userhome.html' %}
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h3></h3>
+
+        </div>
+
+    </div>
+    <div class="card border">
+        <div class="card card-header bg-black">
+            <div class="row">
+                <div class="col-7">
+                    <h5 class="text-white">Order Summary</h5>
+                </div>
+                <div class="offset-2 col-3">
+                  <h6 class="text-info bg-gradient border-1">Back To Home</a></h6>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            {% for i in m %}
+            <div class="row">
+                <h4 class="text-info">PickUp Deatails</h4>
+                <br>
+                <br>
+<div class="col-1">
+<h7>Name</h7>
+<br>
+<br>
+<h7>Phone</h7>
+<br>
+<br>
+<h7>Address</h7>
+<br>
+<br>
+<h7>City</h7>
+<br>
+<br>
+<br>
+<h7>state</h7>
+<br>
+<br>
+<h7>Zipcode</h7>
+<br>
+<br>
+<br>
+<h6>Email</h6>
+<br>
+<h6>orderdate</h6>
+<br>
+<h6>Carrier</h6>
+<br>
+<h6>Tracking</h6>
+<br>
+<h6>ShippingDate</h6>
+<br>
+<h6>TransactionId</h6>
+<br>
+<h6>Paymentduedate</h6>
+<br>
+<h6>PaymentStatus</h6>
+</div>
+<div class="col-5">
+    <form action="{% url 'shipordr' %}" method="post">
+     {% csrf_token %}   
+    <input type="hidden" value="{{i.id}}" name="orderid"> 
+    <label for="username"></label>
+    <input type="text" value="{{i.name}}" name="name">
+    <br>
+    <br>
+    <label for="phone"></label>
+    <input type="text" value="{{i.phone}}" name="phone">
+    <br>
+    <br>
+    <label for="address"></label>
+    <input type="text" value="{{i.address}}" name="address">
+    <br>
+    <br>
+    <label for="city"></label>
+    <input type="text" value="{{i.city}}" name="city">
+    <br>
+    <br>
+    <label for="state"></label>
+    <input type="text" value="{{i.state}}" name="state">
+    <br>
+    <br>
+    <label for="zipcode"></label>
+    <input type="text" value="{{i.zipcode}}" name="zipcode">
+    <br>
+    <br>
+    <label for="email"></label>
+    <input type="text" value="{{i.email}}" name="email">
+    <br>
+    <br>
+    <label for="orderdate"></label>
+    <input type="text" value="{{i.orderdate}}" name="orderdate">
+    <br>
+    <br>
+    <label for="carrier"></label>
+    <input type="text" value="{{i.carrier}}" name="carrier">
+    <br>
+    <br>
+    <label for="tracking"></label>
+    <input type="text" value="{{i.tracking}}" name="tracking">
+    <br>
+    <br>
+    <label for="shippingdate"></label>
+    <input type="text" value="shippingdate" name="shippingdate">
+    <br>
+    <br>
+    <label for="transactionid"></label>
+    <input type="text" value="{{i.transactionid}}" name="transactionid">
+    <br>
+    <br>
+    <br>
+    <label for="paymentdate"></label>
+    <input type="text" value="{{i.paymentdate}}" name="paymentdate">
+    <br>
+    <br>
+    <br>
+    <label for="paymentstatus"></label>
+    <input type="text" value="{{i.paymentstatus}}" name="paymentstatus">
+</div>
+<div class="col-6">
+    <h4 class="text-info">Order Summary</h4>
+    {% for k in n %}
+    <span><h5>{{k.productid}}</h5></span>
+    <span>Quantity:{{k.count}}</span>
+    <br> 
+    <span>${{k.productid.price}}</span>
+    <br>
+    <br>
+    <span class="text-info bg-info text-white">Total(USD):${{k.order.ordertotal}}</span>
+    <input type="hidden" value="{{k.order.ordertotal}}" name="grandtotal">
+    {% endfor %}
+    <br>
+    <br>
+    {% if i.paymentstatus == "paid" and i.orderstatus == "pending" %}
+    <a class="btn btn-dark form-control" href="{% url 'ordersts' i.id %}">Start Processing</a>
+    <br>
+    {% elif i.orderstatus == "inprocess" %}
+    <button type="submit" class="btn btn-dark form-control" >ShippingOrder</button>
+    <br>
+    <br>
+    <a class="btn btn-danger form-control"  href="{% url 'cancel' i.id %}">Cancel Order</a> 
+</div>
+{% else %}
+<h6>nothing</h6>
+{% endif %}  
+</div>
+{% endfor %}  
+<div class="card-footer bg-light">
+    <div class="row">
+        <div class="offset-9 col-3">
+            <button type="submit" class="btn btn-success form-control">Submit</button>
+        </div>
+    </form>
+
+    </div>
+
+</div>
+
+
+</div>
+            </div>
+
+   
+
+</div>
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert("{{msg}}")</script>
+{% endfor %}
+{% endif %}
+{% endblock %}

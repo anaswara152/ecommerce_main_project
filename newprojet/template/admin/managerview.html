@@ -1,0 +1,34 @@
+
+    <table class="table">
+        {% if n %}
+        <tr>
+            <th class="text-bg-dark text-white">Name</th>
+            <th class="text-bg-dark text-white">Phone</th>
+            <th class="text-bg-dark text-white">Email</th>
+            <th class="text-bg-dark text-white">OderStatus</th>
+            <th class="text-bg-dark text-white">Amount</th>
+            <th class="text-bg-dark text-white"> </th>
+            <th class="text-bg-dark text-white"> </th>
+
+        </tr>
+        {% for i in n %}
+        <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.phone}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.orderstatus}}</td>
+            <td>{{i.ordertotal}}</td>
+            <td><a class="btn btn-success"  href="{% url 'deatilesshow' i.id %}">Deatails</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+        {% else %}
+
+    <h6>No Product</h6>
+    {% endif %}
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert("{{msg}}")</script>
+{% endfor %}
+{% endif %}

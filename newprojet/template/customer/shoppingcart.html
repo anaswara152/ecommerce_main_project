@@ -1,0 +1,87 @@
+{% extends 'customer/userhome.html' %}
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="text-info"></h3>
+        </div>
+        
+    </div>
+   
+    <div   class="card border">
+
+        <div class="card-header bg-black">
+            <div class="row">
+                <div class="col-7">
+                    <h3 class="text-white">ShoppingCart</h3>
+                </div>
+                <br>
+                <div class="col-5">
+                    <h6 class="text-info">Continue Shopping</h6>
+                </div>
+            </div>
+           
+        </div>
+        <div class="card-body">
+            {% for i in n %}
+            <div class="row">
+<div class="col-2">
+    <span><img src="{{i.productid.image.url}}" style="width: 50px; height: 50px;" alt=""></span>
+</div>
+        <div class="col-3">
+          <span>{{i.productid.title}}</span><br>
+          <span>{{i.productid.description}}</span>
+        </div>
+        <div class="col-2">
+        
+        </div>
+        <div class="col-2">
+          <span>${{i.price}}x{{i.count}}</span>
+        </div>
+        <div class="col-1">
+            <a href="{% url 'trash' i.id %}" class="btn btn-danger">-</a>
+        </div> 
+        <div class="col-1">
+            <a href="{% url 'addproduct' i.id  %}" class="btn btn-dark">+</a>
+        </div>    
+        <div class="col-1">
+           <a href="{% url 'deleteproductlist' i.id %}" class="btn btn-danger">Delete</a>
+        </div>     
+</div>
+
+        <br>
+     
+       
+        <div class="row">
+  <div class="col-10">
+
+  </div>          
+<div class="col-2">
+    <label for="table" class="text-info">Total(USD) = ${{gr}} </label>
+</div>           
+        </div>
+        <br>
+        {% endfor %} 
+    </div>
+       
+
+<br>
+<div class="card-footer bg-light">
+    <div class="row">
+        <div class="col-8">
+
+        </div>
+        <div class="col-3">
+            <a href="{% url 'summary' %}" class="btn btn-success form-control">Summary</a> 
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+{% if messages %}
+{% for msg in messages %}
+<script>alert("{{msg}}")</script>
+{% endfor %}
+{% endif %}
+{% endblock %}

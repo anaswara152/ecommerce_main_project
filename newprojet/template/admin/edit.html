@@ -1,0 +1,33 @@
+{% extends 'admin/adminhome.html' %}
+{% block content %}
+<div class="container mt-3">
+    <div style="border: 2px solid silver;width: auto;" class="p-5 mt-3">
+    <div class="row">
+       <div class="col-md-6"> 
+       <h2 class="text-info">Edit Category</h2>
+       </div> 
+    <br>
+    <br>
+    {% for i in m %}
+    <form action="{% url 'update' i.id %}" method="post">
+        {% csrf_token %}
+        <div class="col-md-6 ">
+            <label for="category"></label>
+            <input type="category" class="form-control" id="category" placeholder="Enter category" name="category" value="{{i.name}}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-dark">Update</button> <a href="{% url 'viewdeatiles' %}" class="btn btn-success">Back to List</a>    
+    {% endfor %}
+    </form>
+   </div>            
+ </div>
+</div>
+</div>
+</div>
+{% if messages %}
+{% for msg in messages %}
+<script>alert("{{msg}}")</script>
+{% endfor %}
+{% endif %}
+
+{%endblock%}

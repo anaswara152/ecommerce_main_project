@@ -1,0 +1,74 @@
+{% extends 'common/base.html' %}
+{% block content %}
+    <div class="contaioner">
+    <div class="row">
+        <div class="col-lg-4 col-md-2 col-sm-3  col-xs-4">
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-3">
+    <div class="contaioner mt-3">
+        <h2 class="text-center p-4">HOMEPAGE</h2>
+        <form action="{% url 'registration' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3 mt-3">
+                <label for="first_name"></label>
+                <input type="text" class="form-control" id="first_name" placeholder="Enter first_name" name="first_name">
+            </div>
+            
+            <div class="mb-3 mt-3">
+              <label for="last_name"></label>
+              <input type="text" class="form-control" id="last_name" placeholder="Enter last_name" name="last_name">
+           </div>
+
+           <div class="mb-3 mt-3">
+            <label for="username"></label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+          </div>
+
+            <div class="mb-3 mt-3">
+                <label for="email"></label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">  
+            </div>
+            
+            <div class="mb-3 mt-3" >
+                <label for="address"></label>
+                <input type="text" class="form-control" id="address" placeholder="Enter address" name="address"> 
+            </div>
+
+            <div class="mb-3 mt-3"  >
+                <label for="city"></label>
+                <input type="city" class="form-control" id="city" placeholder="Enter city" name="city"> 
+            </div>
+            
+            <div class="mb-3 mt-3">
+                <label for="postalcode"></label>
+                <input type="text" class="form-control" id="postalcode" placeholder="Enter postalcode" name="postalcode"> 
+            </div>
+            
+            <div class="mb-3 mt-3">
+                <label for="state"></label>
+                <input type="text" class="form-control" id="state" placeholder="Enter state" name="state"> 
+            </div>
+           
+            <div class="mb-3 mt-3">
+                <label for="password"></label>
+                <input type="text" class="form-control" id="password" placeholder="Enter password" name="password"> 
+            </div>
+            <div class="text-center p-4">
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+       </div>
+        </div>
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-3  col-xs-4">
+        </div>
+    </div>
+    
+{%endblock%}
+
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert("{{msg}}")</script>
+{% endfor %}
+{% endif %}

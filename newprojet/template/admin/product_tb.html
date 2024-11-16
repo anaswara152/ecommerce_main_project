@@ -1,0 +1,86 @@
+{% extends 'admin/adminhome.html' %}
+{% block content %}
+<div class="container mt-3">
+    <div style="border: 2px solid silver;width: auto;" class="p-5 mt-3">
+    <div class="row">
+       <div class="col-md-6"> 
+       <h2 class="text-info">Create Product</h2>
+       </div> 
+    <br>
+    <br>
+    <form action="{% url 'productadd' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-md-6 ">
+            <label for="title"></label>
+            <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
+        </div>
+        <div class="col-md-6 ">
+            <label for="ISBN"></label>
+            <input type="text" class="form-control" id="ISBN" placeholder="Enter ISBN" name="ISBN">
+        </div>
+        <div class="col-md-6 ">
+            <label for="author"></label>
+            <input type="text" class="form-control" id="author" placeholder="Enter author name" name="author">
+        </div>
+        <div class="col-md-6 ">
+            <label for="description"></label>
+            <input type="text" class="form-control" id="description" placeholder="Enter description" name="description">
+        </div>
+        <div class="col-md-6 ">
+            <label for="listprice"></label>
+            <input type="text" class="form-control" id="listprice" placeholder="Enter listprice" name="listprice">
+        </div>
+        <div class="col-md-6 ">
+            <label for="price"></label>
+            <input type="text" class="form-control" id="price" placeholder="Enter price" name="price">
+        </div>
+        <div class="col-md-6 ">
+            <label for="price50"></label>
+            <input type="text" class="form-control" id="price50" placeholder="Enter price50" name="price50">
+        </div>
+        <div class="col-md-6 ">
+            <label for="price100"></label>
+            <input type="text" class="form-control" id="price100" placeholder="Enter price100" name="price100">
+        </div>
+        <div class="col-md-6 ">
+            <label for="category"></label>
+            <select name="category" id="category" class="form-control">
+                <option value="">--select category--</option>
+    
+            {% for c in ca %}
+            <option value="{{c.id}}">{{c.name}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <br>
+        <br>
+        <div class="col-md-6 ">
+            <label for="covertype"></label>
+            <select name="covertype" id="covertype" class="form-control">
+                <option value="">--select covertype--</option>
+    
+            {% for o in co %}
+            <option value="{{o.id}}">{{o.covertype}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <br>
+        <div class="col-md-6">
+            <label for="image"></label>
+            <input type="file" class="form-control" id="file"  name="image">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-dark">create</button> <a href="{% url 'viewproduct' %}" class="btn btn-success">Back to List</a>    
+    </form>
+   </div>            
+ </div>
+</div>
+</div>
+</div>
+{% if messages %}
+{% for msg in messages %}
+<script>alert("{{msg}}")</script>
+{% endfor %}
+{% endif %}
+
+{%endblock%}

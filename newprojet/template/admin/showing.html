@@ -1,0 +1,54 @@
+{% extends 'admin/adminhome.html' %}
+{% block content %}
+<script src="/static/jquery-1.8.3.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('button').click(function(){
+            filter=$(this).data('id');
+            $.ajax({
+                url:"{% url 'getid'  %}",
+                data:{"type":filter},
+                success:function(data)
+                {
+                    $("#tbl").empty()
+                    $("#tbl").append(data)
+                }
+            })
+        })
+       
+    })
+</script>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4">
+            <h3 class="text-info">Order's List</h3>
+        </div>
+        <div class="col-md-7">
+            <button class="btn btn-info" data-id="1">In Process</button>
+            <button class="btn btn-info" data-id="2">Payment Pending</button>
+            <button class="btn btn-info" data-id="3">Completed</button>
+            <button class="btn btn-info" data-id="4">Rejected</button>
+            <button class="btn btn-info" data-id="5">All</button>
+        
+        </div>
+        <div class="col-md-6 text-end">
+        
+        </div>
+    </div>
+
+
+    <div style="border: 2px solid silver;width: auto;" class="p-5 mt-3">
+        <div>
+            <table class="table" id="tbl">
+            </table>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+    {% for msg in messages %}
+        <script>alert("{{ msg }}")</script>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

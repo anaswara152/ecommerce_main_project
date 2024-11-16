@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-2 col-sm-3 col-xs-12">
+        </div>
+        <div class="col-lg-4 col-md-2 col-sm-3 col-xs-12">
+<div class="container mt-3">
+    <h2></h2>
+    <form action="{% url 'login_user' %}" method="post">
+       {% csrf_token %}
+      <div class="mb-3">
+        <label for="email">email</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+      <div class="mb-3">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+      </div>
+      <br>
+      <div class="mb-3">
+
+      <button type="submit" class="btn btn-primary">Submit</button> <a class="btn btn-success" href="{% url 'password_reset_request' %}">ForgotPassword</a>
+      </div>
+    </form>
+    <br><br>
+</div>
+</div>
+<div class="col-lg-4 col-md-2 col-sm-3 col-xs-12">
+</div>
+</div>
+</div>
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert("{{msg}}")</script>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
+
+
+
+
+            
